@@ -1,0 +1,12 @@
+class Solution:
+    def maxSubArrayLen(self, nums: List[int], k: int) -> int:
+        res = 0
+        dic, sums = {}, 0
+        dic[0] = 0
+        for i in range(len(nums)):
+            sums += nums[i]
+            if sums-k in dic:
+                res = max(res, i+1-dic[sums-k])
+            if sums not in dic:
+                dic[sums]=i+1
+        return res
